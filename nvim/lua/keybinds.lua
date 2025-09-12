@@ -25,7 +25,7 @@ vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
 vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
 
 -- tabby bindings
-vim.g.tabby_keybinding_accept = "<Tab>"
+vim.g.tabby_keybinding_accept = "<C-l>"
 
 -- tabbing keybinds
 vim.api.nvim_set_keymap("n", "<leader>n", ":new | only<CR>", { noremap = true, silent = true })

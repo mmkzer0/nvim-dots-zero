@@ -52,6 +52,26 @@ return {
 			lspconfig.java_language_server.setup({
 				capabilitise = capabilities,
 			})
+			--lspconfig.arduino_language_server.setup({
+			--capabilitise = capabilities,
+			--})
+			lspconfig.hls.setup({
+				capabilitise = capabilities,
+			})
+			lspconfig.gopls.setup({
+				capabilitise = capabilities,
+			})
+			lspconfig.wasm_language_tools.setup({
+				capabilities = capabilities,
+			})
+			--lspconfig.sourcekit.setup({
+			--	capabilitise = capabilities,
+			--})
+			--lspconfig.csharp_ls.setup({
+			--capabilitise = capabilities,
+			--cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+			--root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
+			--})
 		end,
 	},
 }
