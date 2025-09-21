@@ -1,26 +1,27 @@
--- conform config
+-- lua/plugins/conform.lua
 
 return {
 	"stevearc/conform.nvim",
-	config = function()
-		local conform = require("conform")
-		conform.setup({
-			formatters_by_ft = {
-				lua = { "stylua" },
-				-- Conform will run multiple formatters sequentially
-				python = { "isort", "black" },
-				-- You can customize some of the format options for the filetype (:help conform.format)
-				rust = { "rustfmt", lsp_format = "fallback" },
-				-- Conform will run the first available formatter
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-				bash = { "beautysh" },
-				c = { "clang-format", stop_after_first = true },
-			},
-			format_on_save = {
-				-- I recommend these options. See :help conform.format for details.
-				lsp_format = "fallback",
-				timeout_ms = 500,
-			},
-		})
-	end,
+	opts = {
+		notify_on_error = false,
+		format_on_save = function(buf)
+			local skip = { "sql" }
+			if vim.tbl_contains(skip, vim.bo[buf].filetype) then
+				return
+			end
+			return { lsp_fallback = true, timeout_ms = 1000 }
+		end,
+		formatters_by_ft = {
+			lua = { "stylua" },
+			python = { "black", "isort" }, -- or ruff_* if you prefer ruff
+			javascript = { "biome", "prettierd", "prettier" },
+			typescript = { "biome", "prettierd", "prettier" },
+			json = { "biome", "jq" },
+			yaml = { "prettierd", "prettier" },
+			sh = { "shfmt" },
+			c = { "clang-format" },
+			cpp = { "clang-format" },
+			rust = { "rustfmt" },
+		},
+	},
 }

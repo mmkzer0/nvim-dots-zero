@@ -30,3 +30,9 @@ require("keybinds")
 
 -- Setup treesitter
 require("treesit")
+
+-- Include lsp log config
+require("lsplog")
+
+-- small diagnostics
+require("diagnostics")
