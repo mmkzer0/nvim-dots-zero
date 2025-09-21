@@ -1,77 +1,63 @@
--- mason plugin
+-- mason plugin (Neovim 0.11+ / nvim-lspconfig 2.x)
 
 return {
 
+	-- Mason core (new org)
+	{ "mason-org/mason.nvim", opts = {} },
+
+	-- Mason ↔ LSP bridge (now auto-enables via vim.lsp.enable)
 	{
-		"williamboman/mason.nvim",
-		lazy = true,
-		config = function()
-			require("mason").setup()
-		end,
+		"mason-org/mason-lspconfig.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		opts = {
+			-- install what you actually use
+			ensure_installed = {
+				"lua_ls",
+				"rust_analyzer",
+				"clangd",
+				"pyright",
+				"ts_ls", -- tsserver was renamed
+				"asm_lsp",
+				"zls",
+				"gopls",
+				"hls",
+				"wasm_language_tools",
+				-- "jdtls",            -- see note about Java
+				-- "sourcekit",        -- Swift (uses Xcode’s sourcekit-lsp)
+				-- "csharp_ls",
+			},
+			-- default = true; leave it on unless you want to manage enables yourself
+			automatic_enable = true,
+		},
 	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				auto_install = true,
-			})
-		end,
-	},
+
+	-- nvim-lspconfig: data-only; use vim.lsp.config/enable now
 	{
 		"neovim/nvim-lspconfig",
-		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
-			lspconfig.ts_ls.setup({
-				capabilities = capabilities,
+		init = function()
+			-- Advertise nvim-cmp capabilities to ALL servers
+			local cmp_caps = require("cmp_nvim_lsp").default_capabilities()
+			vim.lsp.config("*", { capabilities = cmp_caps }) -- wildcard applies to every server
+
+			-- Per-server tweaks / overrides (optional)
+			vim.lsp.config("asm_lsp", {
+				-- widen filetype detection if you want
+				filetypes = { "asm", "nasm", "gas", "s", "S" },
 			})
-			lspconfig.rust_analyzer.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.asm_lsp.setup({
-				capabilities = capabilities,
-				filetypes = {
-					"asm",
-					"vmasm",
-					"s",
-					"S",
+
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						diagnostics = { globals = { "vim" } },
+						workspace = { checkThirdParty = false },
+					},
 				},
 			})
-			lspconfig.zls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.clangd.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.pyright.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.java_language_server.setup({
-				capabilitise = capabilities,
-			})
-			--lspconfig.arduino_language_server.setup({
-			--capabilitise = capabilities,
-			--})
-			lspconfig.hls.setup({
-				capabilitise = capabilities,
-			})
-			lspconfig.gopls.setup({
-				capabilitise = capabilities,
-			})
-			lspconfig.wasm_language_tools.setup({
-				capabilities = capabilities,
-			})
-			--lspconfig.sourcekit.setup({
-			--	capabilitise = capabilities,
-			--})
-			--lspconfig.csharp_ls.setup({
-			--capabilitise = capabilities,
-			--cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-			--root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
-			--})
+
+			-- Example: Java is special; prefer mfussenegger/nvim-jdtls.
+			-- If you *really* want to start jdtls via lspconfig you must set cmd:
+			-- vim.lsp.config("jdtls", { cmd = { "/absolute/path/to/jdtls" } })
+			-- and then enable it or let Mason auto-enable.
 		end,
 	},
 }
