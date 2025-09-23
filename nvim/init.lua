@@ -36,3 +36,20 @@ require("lsplog")
 
 -- small diagnostics
 require("diagnostics")
+
+-- add ca65 ts grammar
+local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+
+parsers.ca65 = {
+	install_info = {
+		url = "https://github.com/babasbot/tree-sitter-ca65",
+		files = {
+			"src/parser.c",
+		},
+		branch = "main",
+	},
+	filetype = "asm",
+	maintainers = {
+		"@babasbot",
+	},
+}

@@ -10,6 +10,7 @@ lazy.setup({
 	install = { colorscheme = { "habamax" } },
 	-- automatically check for plugin updates
 	checker = { enabled = true },
+	rocks = { enabled = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
