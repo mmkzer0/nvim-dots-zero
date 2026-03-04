@@ -1,6 +1,12 @@
 -- Setup vim-opts
 require("vim-opts")
 
+-- init.lua (top)
+vim.env.PATH = table.concat({
+	vim.fn.stdpath("data") .. "/mason/bin",
+	vim.env.PATH or "",
+}, ":")
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -37,19 +43,8 @@ require("lsplog")
 -- small diagnostics
 require("diagnostics")
 
--- add ca65 ts grammar
-local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-
-parsers.ca65 = {
-	install_info = {
-		url = "https://github.com/babasbot/tree-sitter-ca65",
-		files = {
-			"src/parser.c",
-		},
-		branch = "main",
-	},
-	filetype = "asm",
-	maintainers = {
-		"@babasbot",
-	},
-}
+-- (optional) CA65 treesitter parser, currently disabled (upstream repo 404)
+-- local ok, parsers = pcall(require, "nvim-treesitter.parsers")
+-- if ok then
+--   -- TODO: add a working ca65 tree-sitter repo here
+-- end

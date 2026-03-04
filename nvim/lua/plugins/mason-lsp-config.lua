@@ -20,7 +20,7 @@ return {
 				"asm_lsp",
 				"zls",
 				"gopls",
-				"hls",
+				-- "hls",
 				"wasm-language-tools",
 				-- "jdtls",            -- see note about Java
 				-- "sourcekit",        -- Swift (uses Xcode’s sourcekit-lsp)
@@ -50,6 +50,20 @@ return {
 					Lua = {
 						diagnostics = { globals = { "vim" } },
 						workspace = { checkThirdParty = false },
+					},
+				},
+			})
+
+			vim.lsp.config("clangd", {
+				cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
+			})
+
+			vim.lsp.config("rust_analyzer", {
+				settings = {
+					["rust-analyzer"] = {
+						cargo = { allFeatures = true },
+						procMacro = { enable = true },
+						checkOnSave = { command = "clippy" },
 					},
 				},
 			})
