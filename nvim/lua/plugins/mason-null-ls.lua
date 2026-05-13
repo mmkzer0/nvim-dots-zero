@@ -8,9 +8,7 @@ return {
 	opts = {
 		-- tools I actually use (diagnostics & code-actions; leave formatting to Conform)
 		ensure_installed = {
-			"shellcheck",
 			"shfmt", -- used by Conform for sh formatting
-			"ruff",
 			"black",
 			"isort", -- Conform
 			"stylua", -- Conform
@@ -18,6 +16,7 @@ return {
 			"prettierd",
 			"jq",
 			"hadolint",
+			"rubocop",
 			"clang-format", -- Conform
 		},
 		automatic_installation = true,

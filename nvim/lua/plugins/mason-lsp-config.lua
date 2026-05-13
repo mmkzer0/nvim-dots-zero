@@ -63,7 +63,8 @@ return {
 					["rust-analyzer"] = {
 						cargo = { allFeatures = true },
 						procMacro = { enable = true },
-						checkOnSave = { command = "clippy" },
+						-- `checkOnSave` is now a boolean; use `check.command` to select clippy.
+						check = { command = "clippy" },
 					},
 				},
 			})

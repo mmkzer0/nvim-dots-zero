@@ -9,10 +9,8 @@ return {
 		opts = opts or {}
 		-- only diagnostics / code-actions here (leave formatting to Conform)
 		local sources = {
-			nls.builtins.diagnostics.ruff,
-			nls.builtins.diagnostics.shellcheck,
 			nls.builtins.diagnostics.rubocop,
-			nls.builtins.code_actions.gitsigns,
+			nls.builtins.diagnostics.hadolint,
 			-- no formatting sources here!
 		}
 		opts.sources = vim.tbl_extend("force", opts.sources or {}, sources)
