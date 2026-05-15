@@ -19,6 +19,16 @@ return {
 			"rubocop",
 		},
 		automatic_installation = true,
-		handlers = {}, -- default auto-register into none-ls
+		handlers = {
+			-- Formatters are managed by Conform; prevent auto-registration into none-ls
+			shfmt = function() end,
+			black = function() end,
+			isort = function() end,
+			stylua = function() end,
+			biome = function() end,
+			prettierd = function() end,
+			jq = function() end,
+			-- hadolint and rubocop: default handler registers them into none-ls
+		},
 	},
 }
