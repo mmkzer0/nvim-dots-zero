@@ -21,7 +21,7 @@ return {
 				"zls",
 				"gopls",
 				-- "hls",
-				"wasm-language-tools",
+				"wasm_language_tools",
 				-- "jdtls",            -- see note about Java
 				-- "sourcekit",        -- Swift (uses Xcode’s sourcekit-lsp)
 				-- "csharp_ls",
