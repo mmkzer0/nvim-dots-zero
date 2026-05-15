@@ -1,1 +1,27 @@
-**/.DS_Store
+# Logs
+.nvimlog
+*.log
+
+# Neovim temp files
+*.swp
+*.swo
+*~
+
+# Neovim data directories (if they ever end up in the repo)
+undo/
+backup/
+view/
+
+# OS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+Network Trash Folder
+Temporary Items
+.apdisk
+Thumbs.db
+Desktop.ini
+
+# Caches
+.cache/
