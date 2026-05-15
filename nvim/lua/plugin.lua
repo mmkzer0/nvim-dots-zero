@@ -5,6 +5,7 @@ local lazy = require("lazy")
 
 lazy.setup({
 	spec = "plugins", -- getting plugin specs from /lua/plugins
+	defaults = { lazy = true },
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
 	install = { colorscheme = { "habamax" } },

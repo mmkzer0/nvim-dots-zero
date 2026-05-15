@@ -3,7 +3,7 @@
 return {
 
 	-- Mason core (new org)
-	{ "mason-org/mason.nvim", opts = {} },
+	{ "mason-org/mason.nvim", cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUpdate", "MasonLog" }, opts = {} },
 
 	-- Mason ↔ LSP bridge (now auto-enables via vim.lsp.enable)
 	{

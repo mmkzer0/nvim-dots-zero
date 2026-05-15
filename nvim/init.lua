@@ -34,9 +34,6 @@ require("plugin")
 -- Load keybinds from keybinds.lua
 require("keybinds")
 
--- Setup treesitter
-require("treesit")
-
 -- Include lsp log config
 require("lsplog")
 

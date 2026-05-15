@@ -1,16 +1,14 @@
 -- keybinds.lua
 
-local builtin = require("telescope.builtin")
-
 -- setup keybinds
 
 -- telescope bindings
 
-vim.keymap.set("n", "<C-f>", builtin.find_files, {})
-vim.keymap.set("n", "<C-g>", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-vim.keymap.set("n", "<leader>of", ":Telescope oldfiles<CR>", { silent = true })
+vim.keymap.set("n", "<C-f>", function() require("telescope.builtin").find_files() end, {})
+vim.keymap.set("n", "<C-g>", function() require("telescope.builtin").live_grep() end, {})
+vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end, {})
+vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_tags() end, {})
+vim.keymap.set("n", "<leader>of", function() require("telescope.builtin").oldfiles() end, { silent = true })
 
 -- neo-tree bind
 vim.keymap.set("n", "<C-t>", ":Neotree filesystem reveal left<CR>", {})

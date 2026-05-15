@@ -17,7 +17,6 @@ return {
 			"jq",
 			"hadolint",
 			"rubocop",
-			"clang-format", -- Conform
 		},
 		automatic_installation = true,
 		handlers = {}, -- default auto-register into none-ls
