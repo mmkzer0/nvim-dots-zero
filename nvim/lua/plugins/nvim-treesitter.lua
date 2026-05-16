@@ -10,6 +10,7 @@ return {
 
     -- Monkeypatch for Telescope compatibility (ft_to_lang, get_parser, and configs removed in main)
     local ts_parsers = require("nvim-treesitter.parsers")
+
     if not ts_parsers.ft_to_lang then
       ts_parsers.ft_to_lang = function(ft)
         return vim.treesitter.language.get_lang(ft) or ft
