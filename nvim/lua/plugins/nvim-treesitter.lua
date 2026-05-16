@@ -41,13 +41,14 @@ return {
     local install_queries = config.get_install_dir("queries")
     vim.opt.runtimepath:append(install_queries)
 
-    -- Enable highlighting; language.add fails if parser not installed, so we
-    -- get an explicit availability check instead of a silent pcall on start.
+    -- Enable highlighting; use pcall to gracefully handle parsers that
+    -- fail to load (e.g., not installed or unsupported on this platform).
     vim.api.nvim_create_autocmd("FileType", {
       callback = function(args)
         local lang = vim.treesitter.language.get_lang(args.match)
         if not lang or lang == "" then return end
-        if pcall(vim.treesitter.language.add, lang) then
+        local ok, has_parser = pcall(vim.treesitter.language.add, lang)
+        if ok and has_parser then
           vim.treesitter.start(args.buf, lang)
         end
       end,

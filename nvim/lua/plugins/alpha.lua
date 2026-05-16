@@ -43,12 +43,11 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button("e", "  [E]nter new file", ":ene <BAR> startinsert <CR>"),
+      dashboard.button("f", "󰅚  Find [f]iles", ":Telescope find_files<CR>"),
+      dashboard.button("g", "󰅚  Live [g]rep", ":Telescope live_grep<CR>"),
+      dashboard.button("o", "󰅚  [O]ld Files", ":Telescope oldfiles<CR>"),
+      dashboard.button("h", "󰅚  Find [h]elp", ":Telescope help_tags<CR>"),
       dashboard.button("q", "󰅚  [Q]uit NVIM", ":qa<CR>"),
-      { type = "button", val = "" },
-      dashboard.button("C f", "󰅚  Search [f]iles", ""),
-      dashboard.button("C g", "󰅚  [G]rep files", ""),
-      dashboard.button("_ f h", "󰅚  [F]ind help", ""),
-      dashboard.button("_ o f", "󰅚  Show [O]ld Files", ""),
     }
     alpha.setup(dashboard.config)
   end,
