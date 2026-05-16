@@ -3,6 +3,7 @@
 return {
 	{
 		"leoluz/nvim-dap-go",
+		ft = "go",
 		config = function()
 			require("dap-go").setup()
 		end,
@@ -12,6 +13,22 @@ return {
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
+		},
+		keys = {
+			{
+				"<leader>dt",
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+				desc = "DAP Toggle Breakpoint",
+			},
+			{
+				"<leader>dc",
+				function()
+					require("dap").continue()
+				end,
+				desc = "DAP Continue",
+			},
 		},
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
@@ -28,9 +45,6 @@ return {
 			dap.listeners.before.event_exited.dapui_config = function()
 				dapui.close()
 			end
-
-			vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
-			vim.keymap.set("n", "<leader>dc", dap.continue, {})
 		end,
 	},
 }
