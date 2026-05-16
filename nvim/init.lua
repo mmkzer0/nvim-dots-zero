@@ -1,6 +1,9 @@
 -- Setup vim-opts
 require("vim-opts")
 
+-- Setup filetype detection
+require("filetype")
+
 -- init.lua (top)
 vim.env.PATH = table.concat({
 	vim.fn.stdpath("data") .. "/mason/bin",
